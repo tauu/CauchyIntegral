@@ -1,0 +1,317 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     14095,        308]
+NotebookOptionsPosition[     11408,        232]
+NotebookOutlinePosition[     13660,        291]
+CellTagsIndexPosition[     13617,        288]
+WindowTitle->CauchyIntegral
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["CAUCHY INTEGRAL TUTORIAL", "PacletNameCell"], Cell[TextData[Cell[
+    BoxData[
+     ActionMenuBox[
+      FrameBox[
+       InterpretationBox[Cell[TextData[{
+         "URL",
+         StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+          StripOnInput->False]
+        }]],
+        TextCell[
+         Row[{"URL", 
+           Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+       StripOnInput->
+        False], {"\<\"CauchyIntegral/tutorial/CauchyIntegral\"\>":>
+      None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
+      Module[{DocumentationSearch`Private`nb$}, 
+       DocumentationSearch`Private`nb$ = NotebookPut[
+          Notebook[{
+            Cell["CauchyIntegral/tutorial/CauchyIntegral"]}, Visible -> 
+           False]]; SelectionMove[
+        DocumentationSearch`Private`nb$, All, Notebook]; 
+       FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+       NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+      Delimiter, "\<\"Copy web URL\"\>":>
+      Module[{DocumentationSearch`Private`nb$}, 
+       DocumentationSearch`Private`nb$ = NotebookPut[
+          Notebook[{
+            Cell[
+             BoxData[
+              MakeBoxes[
+               Hyperlink[
+               "http://reference.wolfram.com/language/CauchyIntegral/tutorial/\
+CauchyIntegral.html"], StandardForm]], "Input", TextClipboardType -> 
+             "PlainText"]}, Visible -> False]]; 
+       SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+       FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+       NotebookClose[DocumentationSearch`Private`nb$]; 
+       Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+        NotebookLocate[{
+          URL[
+           StringJoin[
+            If[
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$4524], 
+             "http://reference.wolfram.com/system-modeler/", 
+             "http://reference.wolfram.com/language/"], 
+            "CauchyIntegral/tutorial/CauchyIntegral", ".html"]], None}]}]},
+      Appearance->None,
+      MenuAppearance->Automatic]],
+     LineSpacing->{1.4, 0}]], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["CauchyIntegral", "Title",
+ CellID->509267359],
+
+Cell[BoxData[GridBox[{
+   {
+    TemplateBox[{
+     Cell["XXXX"],"paclet:CauchyIntegral/tutorial/CauchyIntegral#986216853",
+      GraphicsBox[
+       TagBox[
+        RasterBox[{{{128, 128, 128, 32}, {128, 128, 128, 16}, {128, 128, 128, 
+         0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128,
+          128, 128, 0}, {128, 128, 128, 48}}, {{128, 128, 128, 48}, {128, 128,
+          128, 239}, {128, 128, 128, 112}, {128, 128, 128, 0}, {128, 128, 128,
+          0}, {128, 128, 128, 16}, {128, 128, 128, 143}, {128, 128, 128, 
+         239}}, {{128, 128, 128, 0}, {128, 128, 128, 64}, {128, 128, 128, 
+         223}, {128, 128, 128, 191}, {128, 128, 128, 112}, {128, 128, 128, 
+         223}, {128, 128, 128, 191}, {128, 128, 128, 32}}, {{128, 128, 128, 
+         32}, {128, 128, 128, 16}, {128, 128, 128, 16}, {128, 128, 128, 
+         175}, {128, 128, 128, 255}, {128, 128, 128, 127}, {128, 128, 128, 
+         0}, {128, 128, 128, 48}}, {{128, 128, 128, 48}, {128, 128, 128, 
+         239}, {128, 128, 128, 112}, {128, 128, 128, 0}, {128, 128, 128, 
+         16}, {128, 128, 128, 16}, {128, 128, 128, 143}, {128, 128, 128, 
+         239}}, {{128, 128, 128, 0}, {128, 128, 128, 64}, {128, 128, 128, 
+         223}, {128, 128, 128, 191}, {128, 128, 128, 112}, {128, 128, 128, 
+         223}, {128, 128, 128, 191}, {128, 128, 128, 32}}, {{128, 128, 128, 
+         0}, {128, 128, 128, 0}, {128, 128, 128, 16}, {128, 128, 128, 175}, {
+         128, 128, 128, 255}, {128, 128, 128, 127}, {128, 128, 128, 0}, {128, 
+         128, 128, 0}}, {{128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 
+         128, 0}, {128, 128, 128, 0}, {128, 128, 128, 16}, {128, 128, 128, 
+         0}, {128, 128, 128, 0}, {128, 128, 128, 0}}}, {{0, 8}, {8, 0}}, {0, 
+         255}, ColorFunction -> RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic], Selectable -> False], BaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8, 8}, PlotRange -> {{0, 8}, {0, 8}}, 
+       ImageSize -> {8, 9}],GraphicsBox[
+       TagBox[
+        RasterBox[{{{229, 95, 28, 32}, {229, 95, 28, 16}, {229, 95, 28, 0}, {
+         229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 
+         0}, {229, 95, 28, 48}}, {{229, 95, 28, 48}, {229, 95, 28, 239}, {229,
+          95, 28, 112}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 
+         16}, {229, 95, 28, 143}, {229, 95, 28, 239}}, {{229, 95, 28, 0}, {
+         229, 95, 28, 64}, {229, 95, 28, 223}, {229, 95, 28, 191}, {229, 95, 
+         28, 112}, {229, 95, 28, 223}, {229, 95, 28, 191}, {229, 95, 28, 
+         32}}, {{229, 95, 28, 32}, {229, 95, 28, 16}, {229, 95, 28, 16}, {229,
+          95, 28, 175}, {229, 95, 28, 255}, {229, 95, 28, 127}, {229, 95, 28, 
+         0}, {229, 95, 28, 48}}, {{229, 95, 28, 48}, {229, 95, 28, 239}, {229,
+          95, 28, 112}, {229, 95, 28, 0}, {229, 95, 28, 16}, {229, 95, 28, 
+         16}, {229, 95, 28, 143}, {229, 95, 28, 239}}, {{229, 95, 28, 0}, {
+         229, 95, 28, 64}, {229, 95, 28, 223}, {229, 95, 28, 191}, {229, 95, 
+         28, 112}, {229, 95, 28, 223}, {229, 95, 28, 191}, {229, 95, 28, 
+         32}}, {{229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 16}, {229, 
+         95, 28, 175}, {229, 95, 28, 255}, {229, 95, 28, 127}, {229, 95, 28, 
+         0}, {229, 95, 28, 0}}, {{229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95,
+          28, 0}, {229, 95, 28, 0}, {229, 95, 28, 16}, {229, 95, 28, 0}, {229,
+          95, 28, 0}, {229, 95, 28, 0}}}, {{0, 8}, {8, 0}}, {0, 255}, 
+         ColorFunction -> RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic], Selectable -> False], BaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8, 8}, PlotRange -> {{0, 8}, {0, 8}}, 
+       ImageSize -> {8, 9}]},
+     "GrayLinkWithIcon",
+     BaseStyle->{"TutorialJumpBoxLink"}], 
+    TemplateBox[{
+     Cell["XXXX"],"paclet:CauchyIntegral/tutorial/CauchyIntegral#1016047796",
+      GraphicsBox[
+       TagBox[
+        RasterBox[{{{128, 128, 128, 32}, {128, 128, 128, 16}, {128, 128, 128, 
+         0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 128, 0}, {128,
+          128, 128, 0}, {128, 128, 128, 48}}, {{128, 128, 128, 48}, {128, 128,
+          128, 239}, {128, 128, 128, 112}, {128, 128, 128, 0}, {128, 128, 128,
+          0}, {128, 128, 128, 16}, {128, 128, 128, 143}, {128, 128, 128, 
+         239}}, {{128, 128, 128, 0}, {128, 128, 128, 64}, {128, 128, 128, 
+         223}, {128, 128, 128, 191}, {128, 128, 128, 112}, {128, 128, 128, 
+         223}, {128, 128, 128, 191}, {128, 128, 128, 32}}, {{128, 128, 128, 
+         32}, {128, 128, 128, 16}, {128, 128, 128, 16}, {128, 128, 128, 
+         175}, {128, 128, 128, 255}, {128, 128, 128, 127}, {128, 128, 128, 
+         0}, {128, 128, 128, 48}}, {{128, 128, 128, 48}, {128, 128, 128, 
+         239}, {128, 128, 128, 112}, {128, 128, 128, 0}, {128, 128, 128, 
+         16}, {128, 128, 128, 16}, {128, 128, 128, 143}, {128, 128, 128, 
+         239}}, {{128, 128, 128, 0}, {128, 128, 128, 64}, {128, 128, 128, 
+         223}, {128, 128, 128, 191}, {128, 128, 128, 112}, {128, 128, 128, 
+         223}, {128, 128, 128, 191}, {128, 128, 128, 32}}, {{128, 128, 128, 
+         0}, {128, 128, 128, 0}, {128, 128, 128, 16}, {128, 128, 128, 175}, {
+         128, 128, 128, 255}, {128, 128, 128, 127}, {128, 128, 128, 0}, {128, 
+         128, 128, 0}}, {{128, 128, 128, 0}, {128, 128, 128, 0}, {128, 128, 
+         128, 0}, {128, 128, 128, 0}, {128, 128, 128, 16}, {128, 128, 128, 
+         0}, {128, 128, 128, 0}, {128, 128, 128, 0}}}, {{0, 8}, {8, 0}}, {0, 
+         255}, ColorFunction -> RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic], Selectable -> False], BaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8, 8}, PlotRange -> {{0, 8}, {0, 8}}, 
+       ImageSize -> {8, 9}],GraphicsBox[
+       TagBox[
+        RasterBox[{{{229, 95, 28, 32}, {229, 95, 28, 16}, {229, 95, 28, 0}, {
+         229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 
+         0}, {229, 95, 28, 48}}, {{229, 95, 28, 48}, {229, 95, 28, 239}, {229,
+          95, 28, 112}, {229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 
+         16}, {229, 95, 28, 143}, {229, 95, 28, 239}}, {{229, 95, 28, 0}, {
+         229, 95, 28, 64}, {229, 95, 28, 223}, {229, 95, 28, 191}, {229, 95, 
+         28, 112}, {229, 95, 28, 223}, {229, 95, 28, 191}, {229, 95, 28, 
+         32}}, {{229, 95, 28, 32}, {229, 95, 28, 16}, {229, 95, 28, 16}, {229,
+          95, 28, 175}, {229, 95, 28, 255}, {229, 95, 28, 127}, {229, 95, 28, 
+         0}, {229, 95, 28, 48}}, {{229, 95, 28, 48}, {229, 95, 28, 239}, {229,
+          95, 28, 112}, {229, 95, 28, 0}, {229, 95, 28, 16}, {229, 95, 28, 
+         16}, {229, 95, 28, 143}, {229, 95, 28, 239}}, {{229, 95, 28, 0}, {
+         229, 95, 28, 64}, {229, 95, 28, 223}, {229, 95, 28, 191}, {229, 95, 
+         28, 112}, {229, 95, 28, 223}, {229, 95, 28, 191}, {229, 95, 28, 
+         32}}, {{229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95, 28, 16}, {229, 
+         95, 28, 175}, {229, 95, 28, 255}, {229, 95, 28, 127}, {229, 95, 28, 
+         0}, {229, 95, 28, 0}}, {{229, 95, 28, 0}, {229, 95, 28, 0}, {229, 95,
+          28, 0}, {229, 95, 28, 0}, {229, 95, 28, 16}, {229, 95, 28, 0}, {229,
+          95, 28, 0}, {229, 95, 28, 0}}}, {{0, 8}, {8, 0}}, {0, 255}, 
+         ColorFunction -> RGBColor], 
+        BoxForm`ImageTag[
+        "Byte", ColorSpace -> "RGB", Interleaving -> True, Magnification -> 
+         Automatic], Selectable -> False], BaseStyle -> "ImageGraphics", 
+       ImageSizeRaw -> {8, 8}, PlotRange -> {{0, 8}, {0, 8}}, 
+       ImageSize -> {8, 9}]},
+     "GrayLinkWithIcon",
+     BaseStyle->{"TutorialJumpBoxLink"}]}
+  }]], "TutorialJumpBox"],
+
+Cell["Test", "Text",
+ CellID->1534169418],
+
+Cell["no idea what to put here....", "Caption",
+ CellID->1891092685],
+
+Cell["well .. i do not kow", "MathCaption",
+ CellID->836781195],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"1", "+", "2"}]], "Input",
+ CellLabel->"In[35]:=",
+ CellID->2058623809],
+
+Cell[BoxData["3"], "Output",
+ ImageSize->{11, 13},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[35]=",
+ CellID->1343367606]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"CauchyIntegral",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "TutorialColor", 
+  "LinkTrails" -> GridBox[{{
+      RowBox[{
+        ButtonBox[
+        "CauchyIntegral", ButtonData -> 
+         "paclet:CauchyIntegral/guide/CauchyIntegral", 
+         BaseStyle -> {"Link", "DockedLinkTrail"}]}]}}, ColumnAlignments -> 
+    Left], "ExampleCounter" -> 1, "ExamplePageLinks" -> {}, "NeedPlatMsgIn" -> 
+  None, "RootCaptions" -> "", 
+  "Metadata" -> {
+   "built" -> "{2016, 6, 22, 15, 4, 4.525218}", 
+    "history" -> {"8.0.4\t", "", "", ""}, "context" -> "CauchyIntegral`", 
+    "keywords" -> {"Derivative CauchyIntegral Numeric"}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "Cauchy Integral Tutorial", "language" -> "en", "paclet" -> 
+    "CauchyIntegral", "status" -> "None", "summary" -> 
+    "Test no idea what to put here.... well .. i do not kow", 
+    "synonyms" -> {}, "title" -> "CauchyIntegral", "titlemodifier" -> "", 
+    "windowtitle" -> "CauchyIntegral", "type" -> "Tutorial", "uri" -> 
+    "CauchyIntegral/tutorial/CauchyIntegral"}, "SearchTextTranslated" -> ""},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> Notebook], 
+   Cell[
+    StyleData["Output"], CellContext -> Notebook], 
+   Cell[
+    StyleData["TutorialMoreAboutSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["RelatedTutorialsSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["TutorialRelatedLinksSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}]}, Visible -> False, 
+  FrontEndVersion -> 
+  "10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, 2014)", 
+  StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[586, 21, 2347, 55, 70, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[2958, 80, 51, 1, 70, "Title",
+ CellID->509267359],
+Cell[3012, 83, 7879, 120, 70, "TutorialJumpBox"],
+Cell[10894, 205, 41, 1, 70, "Text",
+ CellID->1534169418],
+Cell[10938, 208, 68, 1, 70, "Caption",
+ CellID->1891092685],
+Cell[11009, 211, 63, 1, 70, "MathCaption",
+ CellID->836781195],
+Cell[CellGroupData[{
+Cell[11097, 216, 94, 3, 70, "Input",
+ CellID->2058623809],
+Cell[11194, 221, 160, 5, 70, "Output",
+ CellID->1343367606]
+}, Open  ]]
+}, Open  ]],
+Cell[11381, 230, 23, 0, 70, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)

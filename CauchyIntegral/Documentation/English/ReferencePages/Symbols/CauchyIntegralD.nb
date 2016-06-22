@@ -1,0 +1,810 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     22890,        801]
+NotebookOptionsPosition[     17402,        623]
+NotebookOutlinePosition[     18492,        661]
+CellTagsIndexPosition[     18407,        656]
+WindowTitle->CauchyIntegralD
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["CAUCHY INTEGRAL SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "Tutorials",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }]],
+         TextCell[
+          Row[{"Tutorials", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"CauchyIntegral\"\>":>
+       Documentation`HelpLookup[
+       "paclet:CauchyIntegral/tutorial/CauchyIntegral"]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"Tutorials"]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "Related Guides",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }]],
+         TextCell[
+          Row[{"Related Guides", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"CauchyIntegral\"\>":>
+       Documentation`HelpLookup["paclet:CauchyIntegral/guide/CauchyIntegral"]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"MoreAbout"]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "URL",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }]],
+         TextCell[
+          Row[{"URL", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"CauchyIntegral/ref/CauchyIntegralD\"\>":>
+       None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["CauchyIntegral/ref/CauchyIntegralD"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/language/CauchyIntegral/ref/\
+CauchyIntegralD.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+             If[
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$3004], 
+              "http://reference.wolfram.com/system-modeler/", 
+              "http://reference.wolfram.com/language/"], 
+             "CauchyIntegral/ref/CauchyIntegralD", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ CellID->1],
+
+Cell["CauchyIntegralD", "ObjectName",
+ CellID->1224892054],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"CauchyIntegralD", "[", 
+       RowBox[{"f", ",", "n", ",", "z"}], "]"}]], "InlineFormula"],
+     " \[LineSeparator]calculates  ",
+     Cell[BoxData[
+      RowBox[{
+       SuperscriptBox["f", 
+        RowBox[{"(", "n", ")"}]], 
+       RowBox[{"(", "z", ")"}]}]], "InlineFormula"],
+     " using Cauchy's integral formula."
+    }]]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
+   "RowsIndexed" -> {}}},
+ CellID->982511436],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    InterpretationBox[
+     StyleBox[
+      GraphicsBox[{},
+       BaselinePosition->Baseline,
+       ImageSize->{6, 0}],
+      CacheGraphics->False],
+     Spacer[6]]]],
+   "Details"
+  }], "NotesFrameText"],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->105267211],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell["\<\
+CauchtIntegralD combines CauchtyIntegralSEW and CauchyIntegral to calculate a \
+contour on a grid graph that minimizes the condition number of the Cauchy \
+integral and evaluates it to calculate the derivative of a function.\
+\>", "Notes",
+ CellID->1067943069],
+
+Cell["", "SectionFooterSpacer"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  InterpretationBox[
+   StyleBox[
+    GraphicsBox[{},
+     BaselinePosition->Baseline,
+     ImageSize->{6, 0}],
+    CacheGraphics->False],
+   Spacer[6]]]],
+ "Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(7)", "ExampleCount"]
+}], "PrimaryExamplesSection",
+ WholeCellGroupOpener->True,
+ CellTags->"PrimaryExamplesSection",
+ CellID->1846973796],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount"]
+}], "ExampleSection", "ExampleSection",
+ WholeCellGroupOpener->True,
+ CellID->212471987],
+
+Cell[BoxData[
+ RowBox[{
+  FormBox[
+   RowBox[{
+    SuperscriptBox["f", 
+     RowBox[{"(", "20", ")"}]], "(", "0", ")"}],
+   TraditionalForm], " ", "for", " ", 
+  FormBox[
+   RowBox[{"f", "=", 
+    SuperscriptBox["e", "z"]}],
+   TraditionalForm]}]], "ExampleText",
+ CellID->258655301],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CauchyIntegralD", "[", 
+  RowBox[{"Exp", ",", "20", ",", "0"}], "]"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->1691093278],
+
+Cell[BoxData[
+ RowBox[{"1.`", "\[VeryThinSpace]", "+", 
+  RowBox[{"5.359979045527002`*^-17", " ", "\[ImaginaryI]"}]}]], "Output",
+ ImageSize->{134, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[1]=",
+ CellID->190886431]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Options",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(6)", "ExampleCount"]
+}], "ExampleSection", "ExampleSection",
+ WholeCellGroupOpener->True,
+ CellID->529155634],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "\"Cuts\"",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount"]
+}], "ExampleSubsection", "ExampleSubsection",
+ WholeCellGroupOpener->True,
+ CellID->788958411],
+
+Cell["\<\
+For example the function f(z)=(1-z)^(11/2) has a branch-cut along [1,\
+\[Infinity]), so the contour for the Cauchy integral has to move around it. \
+Consequently we have to remove edges crossing this line from the graph as \
+otherwise the contour returned by CauchyIntegralSEW could actually cross it. \
+\
+\>", "ExampleText",
+ CellID->132209359],
+
+Cell[TextData[{
+ "See ",
+ Cell[BoxData[
+  TemplateBox[{Cell[
+     TextData["CauchyIntegralSEW"]],
+    "paclet:CauchyIntegral/ref/CauchyIntegralSEW"},
+   "RefLink",
+   BaseStyle->"InlineFormula"]], "InlineFormula"],
+ " for an example of the resulting graphs."
+}], "ExampleText",
+ CellID->1718717708],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CauchyIntegralD", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"1", "-", "#"}], ")"}], "^", 
+     RowBox[{"(", 
+      RowBox[{"11", "/", "2"}], ")"}]}], "&"}], ",", "20", ",", "0", ",", 
+   RowBox[{"\"\<Cuts\>\"", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"Line", "[", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "1000"}], "}"}], "]"}], "}"}]}]}], "]"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->1669720939],
+
+Cell[BoxData[
+ RowBox[{"2.1161045028744854`*^12", "-", 
+  RowBox[{"0.0004016577583140573`", " ", "\[ImaginaryI]"}]}]], "Output",
+ ImageSize->{186, 15},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[1]=",
+ CellID->2035160846]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "\"GridSize\"",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount"]
+}], "ExampleSubsection", "ExampleSubsection",
+ WholeCellGroupOpener->True,
+ CellID->1459977099],
+
+Cell["\<\
+Number of vertices in x and y direction; the default value of 51 yields grids \
+with 51x51 vertices.\
+\>", "ExampleText",
+ CellID->1442246557]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "\"InitialGridRadius\"",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount"]
+}], "ExampleSubsection", "ExampleSubsection",
+ WholeCellGroupOpener->True,
+ CellID->686952271],
+
+Cell[TextData[{
+ "Sets the width of the first grid that is used to calculate a SEW. The \
+default value is 1 and will yield a first grid that covers the square defined \
+by the two points ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"z", "-", "1", "-", 
+    RowBox[{"1", " ", "\[ImaginaryI]"}]}], TraditionalForm]], "InlineMath"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"z", "+", "1", "+", 
+    RowBox[{"1", " ", "\[ImaginaryI]"}]}], TraditionalForm]], "InlineMath"],
+ "."
+}], "ExampleText",
+ CellID->2049695212],
+
+Cell[TextData[{
+ "Setting this value clos to optimal radius will speed up the calculation, as \
+CauchyIntegralSEW will have less work to do to find the optimal radius. For \
+example the optimal radius for",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"f", " ", 
+     RowBox[{"(", "z", ")"}]}], "=", 
+    SuperscriptBox["e", "z"]}], TraditionalForm]], "InlineMath"],
+ " is 20."
+}], "ExampleText",
+ CellID->1976292953],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CauchyIntegralD", "[", 
+   RowBox[{"Exp", ",", "20", ",", "0"}], "]"}], "//", 
+  "AbsoluteTiming"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->426092922],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"9.416624`7.425440223150537", ",", 
+   RowBox[{"1.`", "\[VeryThinSpace]", "+", 
+    RowBox[{"5.359979045527002`*^-17", " ", "\[ImaginaryI]"}]}]}], 
+  "}"}]], "Output",
+ ImageSize->{217, 18},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[1]=",
+ CellID->1080911538]
+}, Open  ]],
+
+Cell["\<\
+Giving that information to the CauchyIntegralD speeds up the calculation a \
+lot.\
+\>", "ExampleText",
+ CellID->1904706298],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CauchyIntegralD", "[", 
+   RowBox[{"Exp", ",", "20", ",", "0", ",", 
+    RowBox[{"\"\<InitialGridRadius\>\"", "\[Rule]", "20"}]}], "]"}], "//", 
+  "AbsoluteTiming"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->1633260956],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"2.682328`6.880056876586595", ",", 
+   RowBox[{"0.9999999999999999`", "\[VeryThinSpace]", "-", 
+    RowBox[{"7.806926001093677`*^-17", " ", "\[ImaginaryI]"}]}]}], 
+  "}"}]], "Output",
+ ImageSize->{217, 18},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[2]=",
+ CellID->1316049193]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "\"MaxGridRadius\"",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount"]
+}], "ExampleSubsection", "ExampleSubsection",
+ WholeCellGroupOpener->True,
+ CellID->734732425],
+
+Cell["\<\
+Sets the maximum radius that a grid used to calculate a contour may have. If \
+CauchyIntegralSEW reaches this value, it will abort and return the best \
+Contour it has found so far. \
+\>", "ExampleText",
+ CellID->2033376389],
+
+Cell["\<\
+Setting both \"MaxGridRadius\" and \"InitialGridRadius\" to the same value \
+forces CauchyIntegralSEW to calculate the SEW in only one graph and can \
+speedup the calculation even fruther.\
+\>", "ExampleText",
+ CellID->438235229],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CauchyIntegralD", "[", 
+   RowBox[{"Exp", ",", "20", ",", "0", ",", "\[IndentingNewLine]", 
+    RowBox[{"\"\<InitialGridRadius\>\"", "\[Rule]", "20"}]}], "]"}], "//", 
+  "AbsoluteTiming"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->1102450223],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"2.682328`6.880056876586595", ",", 
+   RowBox[{"0.9999999999999999`", "\[VeryThinSpace]", "-", 
+    RowBox[{"7.806926001093677`*^-17", " ", "\[ImaginaryI]"}]}]}], 
+  "}"}]], "Output",
+ ImageSize->{217, 18},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[1]=",
+ CellID->391991645]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CauchyIntegralD", "[", 
+   RowBox[{"Exp", ",", "20", ",", "0", ",", "\[IndentingNewLine]", 
+    RowBox[{"\"\<InitialGridRadius\>\"", "\[Rule]", "20"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"\"\<MaxGridRadius\>\"", "\[Rule]", "20"}]}], "]"}], "//", 
+  "AbsoluteTiming"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->2007508304],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1.356419`6.58393885801205", ",", 
+   RowBox[{"0.9999999999999999`", "\[VeryThinSpace]", "-", 
+    RowBox[{"7.806926001093677`*^-17", " ", "\[ImaginaryI]"}]}]}], 
+  "}"}]], "Output",
+ ImageSize->{217, 18},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[2]=",
+ CellID->2119993649]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+StyleBox[\"WorkingPrecision\", FontFamily -> \"Courier New Bold\", FontWeight \
+-> \"Plain\"]\
+\>", "\[NonBreakingSpace]\[NonBreakingSpace]", "ExampleSubsection", \
+"ExampleSubsection",
+ CellID->1757724783],
+
+Cell[BoxData[
+ WholeCellGroupOpener -> True], "Input"],
+
+Cell["Closed", "Input"],
+
+Cell[BoxData["Open"], "Input"]
+}, Cell["Sets the precision used for calculating the SEW and evaluating the \
+integral. Default: MachinePrecision", "ExampleText", CellID -> 1544605715]]]
+}, Cell[CellGroupData[{
+  Cell[TextData[
+    Join[StyleBox[
+      "PrecisionGoal", FontFamily -> "Courier New Bold", FontWeight -> 
+       "Plain"], {
+      "\[NonBreakingSpace]\[NonBreakingSpace]", Cell[
+       "(1)", "ExampleCount"]}]], "ExampleSubsection", "ExampleSubsection", 
+    CellID -> 1405927069, WholeCellGroupOpener -> True], Cell[
+   "Sets the precision used for calculating the SEW and evaluating the \
+integral. Default: MachinePrecision", "ExampleText", CellID -> 653680742]}, 
+  Closed]]]],
+
+Cell["", "SectionFooterSpacer"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  InterpretationBox[
+   StyleBox[
+    GraphicsBox[{},
+     BaselinePosition->Baseline,
+     ImageSize->{6, 0}],
+    CacheGraphics->False],
+   Spacer[6]]]],
+ "Tutorials"
+}], "TutorialsSection",
+ WholeCellGroupOpener->True,
+ CellID->250839057],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["CauchyIntegral"]],
+   "paclet:CauchyIntegral/tutorial/CauchyIntegral"},
+  "RefLink",
+  BaseStyle->"Tutorials"]], "Tutorials",
+ CellID->341631938],
+
+Cell["", "SectionFooterSpacer"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  InterpretationBox[
+   StyleBox[
+    GraphicsBox[{},
+     BaselinePosition->Baseline,
+     ImageSize->{6, 0}],
+    CacheGraphics->False],
+   Spacer[6]]]],
+ "Related Guides"
+}], "MoreAboutSection",
+ WholeCellGroupOpener->True],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["CauchyIntegral"]],"paclet:CauchyIntegral/guide/CauchyIntegral"},
+  
+  "RefLink",
+  BaseStyle->"MoreAbout"]], "MoreAbout",
+ CellID->1898864195],
+
+Cell["", "SectionFooterSpacer"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  InterpretationBox[
+   StyleBox[
+    GraphicsBox[{},
+     BaselinePosition->Baseline,
+     ImageSize->{6, 0}],
+    CacheGraphics->False],
+   Spacer[6]]]],
+ "Related Links"
+}], "RelatedLinksSection",
+ WholeCellGroupOpener->True,
+ CellID->1584193535],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell[TextData[Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["Optimal Contours for High-Order Derivatives"]],
+   "http://arxiv.org/abs/1107.0498"},
+  "WebLink",
+  BaseStyle->{"RelatedLinks"}]]]], "RelatedLinks",
+ CellID->1038487239],
+
+Cell[TextData[Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData[
+    "Accuracy and Stability of Computing High-Order Derivatives of Analytic \
+Functions by Cauchy Integrals"]],"http://arxiv.org/abs/0910.1841"},
+  "WebLink",
+  BaseStyle->{"RelatedLinks"}]]]], "RelatedLinks",
+ CellID->1698068240]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"CauchyIntegralD",
+TaggingRules->{"LinkTrails" -> "", "SearchTextTranslated" -> ""},
+CellContext->"Global`",
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> 
+  "10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, 2014)", 
+  StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[6016, 180, 388, 15, 70, "PrimaryExamplesSection",
+   CellTags->"PrimaryExamplesSection",
+   CellID->1846973796]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 18263, 649}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[587, 21, 3607, 89, 70, "AnchorBarGrid",
+ CellID->1],
+Cell[4197, 112, 58, 1, 70, "ObjectName",
+ CellID->1224892054],
+Cell[CellGroupData[{
+Cell[4280, 117, 583, 18, 70, "Usage",
+ CellID->982511436],
+Cell[CellGroupData[{
+Cell[4888, 139, 738, 24, 70, "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->105267211],
+Cell[5629, 165, 31, 0, 70, "SectionHeaderSpacer"],
+Cell[5663, 167, 270, 5, 70, "Notes",
+ CellID->1067943069],
+Cell[5936, 174, 31, 0, 70, "SectionFooterSpacer"]
+}, Closed]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6016, 180, 388, 15, 70, "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection",
+ CellID->1846973796],
+Cell[CellGroupData[{
+Cell[6429, 199, 195, 6, 70, "ExampleSection",
+ CellID->212471987],
+Cell[6627, 207, 283, 11, 70, "ExampleText",
+ CellID->258655301],
+Cell[CellGroupData[{
+Cell[6935, 222, 148, 4, 70, "Input",
+ CellID->1691093278],
+Cell[7086, 228, 260, 7, 70, "Output",
+ CellID->190886431]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7395, 241, 188, 6, 70, "ExampleSection",
+ CellID->529155634],
+Cell[CellGroupData[{
+Cell[7608, 251, 195, 6, 70, "ExampleSubsection",
+ CellID->788958411],
+Cell[7806, 259, 355, 7, 70, "ExampleText",
+ CellID->132209359],
+Cell[8164, 268, 298, 10, 70, "ExampleText",
+ CellID->1718717708],
+Cell[CellGroupData[{
+Cell[8487, 282, 465, 15, 70, "Input",
+ CellID->1669720939],
+Cell[8955, 299, 260, 7, 70, "Output",
+ CellID->2035160846]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[9264, 312, 200, 6, 70, "ExampleSubsection",
+ CellID->1459977099],
+Cell[9467, 320, 152, 4, 70, "ExampleText",
+ CellID->1442246557]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[9656, 329, 208, 6, 70, "ExampleSubsection",
+ CellID->686952271],
+Cell[9867, 337, 515, 15, 70, "ExampleText",
+ CellID->2049695212],
+Cell[10385, 354, 422, 12, 70, "ExampleText",
+ CellID->1976292953],
+Cell[CellGroupData[{
+Cell[10832, 370, 188, 6, 70, "Input",
+ CellID->426092922],
+Cell[11023, 378, 338, 10, 70, "Output",
+ CellID->1080911538]
+}, Open  ]],
+Cell[11376, 391, 133, 4, 70, "ExampleText",
+ CellID->1904706298],
+Cell[CellGroupData[{
+Cell[11534, 399, 255, 7, 70, "Input",
+ CellID->1633260956],
+Cell[11792, 408, 354, 10, 70, "Output",
+ CellID->1316049193]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[12195, 424, 204, 6, 70, "ExampleSubsection",
+ CellID->734732425],
+Cell[12402, 432, 234, 5, 70, "ExampleText",
+ CellID->2033376389],
+Cell[12639, 439, 239, 5, 70, "ExampleText",
+ CellID->438235229],
+Cell[CellGroupData[{
+Cell[12903, 448, 278, 7, 70, "Input",
+ CellID->1102450223],
+Cell[13184, 457, 353, 10, 70, "Output",
+ CellID->391991645]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13574, 472, 368, 9, 70, "Input",
+ CellID->2007508304],
+Cell[13945, 483, 353, 10, 70, "Output",
+ CellID->2119993649]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[14347, 499, 217, 6, 70, "\[NonBreakingSpace]\[NonBreakingSpace]",
+ CellID->1757724783],
+Cell[14567, 507, 54, 1, 70, "Input"],
+Cell[14624, 510, 23, 0, 70, "Input"],
+Cell[14650, 512, 30, 0, 70, "Input"]
+}, Cell["Sets the precision used for calculating the SEW and evaluating the \
+integral. Default: MachinePrecision", "ExampleText", CellID -> 1544605715]]]
+}, Cell[CellGroupData[{
+  Cell[TextData[
+    Join[StyleBox[
+      "PrecisionGoal", FontFamily -> "Courier New Bold", FontWeight -> 
+       "Plain"], {
+      "\[NonBreakingSpace]\[NonBreakingSpace]", Cell[
+       "(1)", "ExampleCount"]}]], "ExampleSubsection", "ExampleSubsection", 
+    CellID -> 1405927069, WholeCellGroupOpener -> True], Cell[
+   "Sets the precision used for calculating the SEW and evaluating the \
+integral. Default: MachinePrecision", "ExampleText", CellID -> 653680742]}, 
+  Closed]]]],
+Cell[15346, 527, 31, 0, 70, "SectionFooterSpacer"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[15414, 532, 272, 12, 70, "TutorialsSection",
+ CellID->250839057],
+Cell[15689, 546, 31, 0, 70, "SectionHeaderSpacer"],
+Cell[15723, 548, 193, 6, 70, "Tutorials",
+ CellID->341631938],
+Cell[15919, 556, 31, 0, 70, "SectionFooterSpacer"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15987, 561, 257, 11, 70, "MoreAboutSection"],
+Cell[16247, 574, 31, 0, 70, "SectionHeaderSpacer"],
+Cell[16281, 576, 190, 6, 70, "MoreAbout",
+ CellID->1898864195],
+Cell[16474, 584, 31, 0, 70, "SectionFooterSpacer"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16542, 589, 280, 12, 70, "RelatedLinksSection",
+ CellID->1584193535],
+Cell[16825, 603, 31, 0, 70, "SectionHeaderSpacer"],
+Cell[16859, 605, 232, 6, 70, "RelatedLinks",
+ CellID->1038487239],
+Cell[17094, 613, 292, 7, 70, "RelatedLinks",
+ CellID->1698068240]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

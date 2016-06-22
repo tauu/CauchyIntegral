@@ -1,0 +1,462 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     14972,        453]
+NotebookOptionsPosition[     11975,        372]
+NotebookOutlinePosition[     13625,        413]
+CellTagsIndexPosition[     13582,        410]
+WindowTitle->CauchyIntegral
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["CAUCHY INTEGRAL GUIDE", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "Functions",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }]],
+         TextCell[
+          Row[{"Functions", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"CauchyIntegral\"\>":>
+       Documentation`HelpLookup[
+       "paclet:CauchyIntegral/ref/CauchyIntegral"], "\<\"CauchyIntegralD\"\>":>
+       Documentation`HelpLookup[
+       "paclet:CauchyIntegral/ref/CauchyIntegralD"], "\<\"CauchyIntegralSEW\"\
+\>":>Documentation`HelpLookup[
+       "paclet:CauchyIntegral/ref/CauchyIntegralSEW"], \
+"\<\"SEWContourPlot\"\>":>Documentation`HelpLookup[
+       "paclet:CauchyIntegral/ref/SEWContourPlot"]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"GuideFunction"]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "Related Guides",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }]],
+         TextCell[
+          Row[{"Related Guides", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {
+       RowBox[{
+        RowBox[{"{", "}"}], "\[LeftDoubleBracket]", "1", 
+        "\[RightDoubleBracket]"}]:>Documentation`HelpLookup[
+        If[
+         StringMatchQ[
+          Part[{}, 2], "paclet*"], 
+         Part[
+          Part[{{}, {}}, 1], 2], 
+         StringJoin["paclet:", 
+          Part[
+           Part[{{}, {}}, 1], 2]]]], 
+       RowBox[{
+        RowBox[{"{", "}"}], "\[LeftDoubleBracket]", "1", 
+        "\[RightDoubleBracket]"}]:>Documentation`HelpLookup[
+        If[
+         StringMatchQ[
+          Part[{}, 2], "paclet*"], 
+         Part[
+          Part[{{}, {}}, 2], 2], 
+         StringJoin["paclet:", 
+          Part[
+           Part[{{}, {}}, 2], 2]]]]},
+       Appearance->None,
+       MenuAppearance->Automatic,
+       MenuStyle->"GuideMoreAbout"]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox[
+        InterpretationBox[Cell[TextData[{
+          "URL",
+          StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+           StripOnInput->False]
+         }]],
+         TextCell[
+          Row[{"URL", 
+            Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+        StripOnInput->False], {"\<\"CauchyIntegral/guide/CauchyIntegral\"\>":>
+       None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["CauchyIntegral/guide/CauchyIntegral"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web URL\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/language/CauchyIntegral/guide/\
+CauchyIntegral.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+             If[
+              TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$1905], 
+              "http://reference.wolfram.com/system-modeler/", 
+              "http://reference.wolfram.com/language/"], 
+             "CauchyIntegral/guide/CauchyIntegral", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["CauchyIntegral", "GuideTitle",
+ CellID->942062912],
+
+Cell["\<\
+This package provides function to evaluate evaluate the Cauchy integral and \
+focuses on calculating high-order derivatives of functions.\
+\>", "GuideAbstract",
+ CellID->2001916300]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  InterpretationBox[
+   StyleBox[
+    GraphicsBox[{},
+     BaselinePosition->Baseline,
+     ImageSize->{6, 0}],
+    CacheGraphics->False],
+   Spacer[6]]]],
+ "Learning Resources"
+}], "GuideLearningResourcesSection",
+ WholeCellGroupOpener->True],
+
+Cell[BoxData[GridBox[{
+   {Cell[BoxData[GridBox[{
+       {Cell[BoxData[GridBox[{
+           {
+            GraphicsBox[RasterBox[CompressedData["
+1:eJztlOly2lYYhj3T2+ifTu+ol5AbyF0krZ04TZvEMavNIhBCbGI1FgIJxI4k
+zA7GruPaQGP/yQ30BQmCj3G2Tmf6o9+80mg05zzfes4Pjx7/9Oi7ra2tH/F8
+j2f+/eF/+9csmxWXyq1L2ChBV3al+8CbmxuH083F4kvFuGgsYig6FxcNG+Lm
+inChNb1+85YANhqKxWrfebb75Om2nw1kRWkhMZsTBUPz2DKGshlhLt6QAO2b
+LARz763J5aKePX/x9JcdmmFFKZ+bS8oZcIP/CRcms5VgMgyrKKqb8qaPeakg
+S4WClC+IhvIPuVjnm8w2gklRXkVVDw6dwVAE2/NycSF5wf8iFxaLnWDCC+Wh
+n+++fPLzts/PyqWSXCwV5ioWDP4DLiTdhWSxHhBMs8Vutth+ffn7qzd7aT5T
+LFcWKsslXUsXH/nFfOGOC6vtkGAGAuHrySQciVaqtbKuSrWky+Dfd3EnBbvd
+QTCdLg9G3eX2RmMJbK/W6hVdn3BRuuMCvSCYfjbI+IPIfHtnN5E8qjeUWr1R
+1bXkI02DX60uXVSWLsqHDhfBpGnG6aL2zTa3h8YatXmiNpuKpuG7rqi1hgLC
+vtnKC7mPKdRq6y4cTmodOJ1OY/EkPtK80O72oFane9LuNFvtVJp3UV4xL2MB
+RtfHsEJOclGeMBcjsnC5PUScHi+DLW6KDoU5AHv9AZ5Or18sV495nBKRDYYv
+Li74TBYFR2ui8aSiag1V1bNAoXBeyL4HQxwXx5H/7RVmSRiMTgfDUX84kkuV
+ozR/fX19dXX158IuLy+1ZhMu8nIpXyhqJy0UStGaiIpgctE4zwu0j8UpQ5ij
+8RnNBIJhTi6We/3+bDabLmwymYCPgFvtdjKV9tJMu9NtdTooFMMECGYydXR7
+e5sT86Dp6g2GCEbVmu+X9tfCZgs7P/+DYYMA9gaDbn+AKrGB8P3cURBd1VpD
+x6JZlJd5v8la7U40nhiejoeo0ugUVUIjCCZQCFVn6tEiTtzG4/HZRiYsI+RQ
+bSOv03GEi9/PXVU1VLWhavqySrWePDqOJVKiVCBocJRMHePCz+akVa2w9z5z
+Op2t13OVfrFUAefdu0u80SD9e532EBP1hGx2B64sjPpqZV3RMIqYyUAoAiDy
+RUHwRgqfZdI+P34CaLLYVj2CEA8OEWoLeCgS1VHaSfuzcWKKkPvZ2TnGG9uJ
+xev89mJ0N4pgopL4gx7FE6lVj75WG3NHqMj99Z4JJ+6fM5E1mJD9wOn1+dd7
+9M1M1BM3A96oZ2N+23yLcAl92GQImFCn08UN+YXayPwv298MF5pM
+              "], {{0, 
+              0}, {28, 35}}, {0, 255},
+              ColorFunction->RGBColor],
+             Background->GrayLevel[0.952941],
+             ImageSize->{28, 35},
+             PlotRange->{{0, 28}, {0, 35}}], GridBox[{
+              {""},
+              {Cell["Tutorials", "GuideTutorialsSection",
+                WholeCellGroupOpener->True]},
+              {Cell[BoxData[
+                TemplateBox[{Cell[
+                   Part[{}, 1]],If[
+                   StringMatchQ[
+                    Part[{}, 2], "paclet:*"], 
+                   Part[{}, 2], 
+                   StringJoin["paclet:", 
+                    Part[{}, 2]]]},
+                 "RefLink",
+                 BaseStyle->{"GuideTutorial"}]], "GuideTutorial"]}
+             },
+             GridBoxDividers->{"Rows" -> {{False}}}]}
+          },
+          GridBoxAlignment->{"Rows" -> {{Top}}},
+          GridBoxSpacings->{"Columns" -> {{0.3}}}]], "GuideWebResource"]},
+       {""}
+      },
+      GridBoxSpacings->{"Rows" -> {{2}}}]], "GuideWebResource"]}
+  },
+  GridBoxAlignment->{
+   "Columns" -> {{Left, Center}}, 
+    "Rows" -> {{Top}}}]], "GuideLearningResourcesGrid"]
+}, Closed]],
+
+Cell[TextData[{
+ Cell[BoxData[
+  InterpretationBox[
+   StyleBox[
+    GraphicsBox[{},
+     BaselinePosition->Baseline,
+     ImageSize->{6, 0}],
+    CacheGraphics->False],
+   Spacer[6]]]],
+ "Reference"
+}], "GuideReferenceSection",
+ WholeCellGroupOpener->True],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{Cell[
+     TextData["CauchyIntegralD"]],"paclet:CauchyIntegral/ref/CauchyIntegralD"},
+   "RefLink",
+   BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " calculates the derivative of a function using Cauchy's integral formula"
+}], "GuideText",
+ CellID->203374175],
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{Cell[
+     TextData["CauchyIntegralSEW"]],
+    "paclet:CauchyIntegral/ref/CauchyIntegralSEW"},
+   "RefLink",
+   BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " determine a contour that optimizes the condition number of Cauchy's \
+integral formula"
+}], "GuideText",
+ CellID->1813130652],
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{Cell[
+     TextData["SEWContourPlot"]],"paclet:CauchyIntegral/ref/SEWContourPlot"},
+   "RefLink",
+   BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " visualizes the result of ",
+ Cell[BoxData[
+  TemplateBox[{Cell[
+     TextData["CauchyIntegralSEW"]],
+    "paclet:CauchyIntegral/ref/CauchyIntegralSEW"},
+   "RefLink",
+   BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans"],
+ "."
+}], "GuideText",
+ CellID->1211285174],
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{Cell[
+     TextData["CauchyIntegral"]],"paclet:CauchyIntegral/ref/CauchyIntegral"},
+   "RefLink",
+   BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " evaluates the cauchy integral along a path calculated by ",
+ Cell[BoxData[
+  TemplateBox[{Cell[
+     TextData["CauchyIntegralSEW"]],
+    "paclet:CauchyIntegral/ref/CauchyIntegralSEW"},
+   "RefLink",
+   BaseStyle->"InlineFunctionSans"]], "InlineFunctionSans"],
+ "."
+}], "GuideText",
+ CellID->784343780],
+
+Cell["", "SectionFooterSpacer"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  InterpretationBox[
+   StyleBox[
+    GraphicsBox[{},
+     BaselinePosition->Baseline,
+     ImageSize->{6, 0}],
+    CacheGraphics->False],
+   Spacer[6]]]],
+ "Related Guides"
+}], "GuideMoreAboutSection",
+ WholeCellGroupOpener->True,
+ CellID->23220180],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell["Integration", "GuideMoreAbout",
+ CellID->1567025153],
+
+Cell["NIntegrateOverview", "GuideMoreAbout",
+ CellID->252299663],
+
+Cell["", "SectionFooterSpacer"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  InterpretationBox[
+   StyleBox[
+    GraphicsBox[{},
+     BaselinePosition->Baseline,
+     ImageSize->{6, 0}],
+    CacheGraphics->False],
+   Spacer[6]]]],
+ "Related Links"
+}], "GuideRelatedLinksSection",
+ WholeCellGroupOpener->True,
+ CellID->415694148],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell[TextData[Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["Optimal Contours for High-Order Derivatives"]],
+   "http://arxiv.org/abs/1107.0498"},
+  "WebLink",
+  BaseStyle->{"GuideRelatedLinks"}]]]], "GuideRelatedLinks",
+ CellID->1322539607],
+
+Cell[TextData[Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData[
+    "Accuracy and Stability of Computing High-Order Derivatives of Analytic \
+Functions by Cauchy Integrals"]],"http://arxiv.org/abs/0910.1841"},
+  "WebLink",
+  BaseStyle->{"GuideRelatedLinks"}]]]], "GuideRelatedLinks",
+ CellID->1467428399]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"CauchyIntegral",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "GuideColor", "LinkTrails" -> 
+  GridBox[{{
+      RowBox[{
+        ButtonBox[
+        "Wolfram Language", ButtonData -> "paclet:guide/WolframRoot", 
+         BaseStyle -> {"Link", "DockedLinkTrail"}]}]}}, ColumnAlignments -> 
+    Left], "ExampleCounter" -> 1, "ExamplePageLinks" -> {}, "NeedPlatMsgIn" -> 
+  None, "RootCaptions" -> "", 
+  "Metadata" -> {
+   "built" -> "{2016, 6, 22, 15, 3, 54.240291}", 
+    "history" -> {"8.0.4", "", "", ""}, "context" -> "CauchyIntegral`", 
+    "keywords" -> {"Derivative CauchyIntegral Numeric"}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "Cauchy Integral Guide", "language" -> "en", "paclet" -> 
+    "CauchyIntegral", "status" -> "None", "summary" -> 
+    "This package provides function to evaluate evaluate the Cauchy integral \
+and focuses on calculating high-order derivatives of functions.", 
+    "synonyms" -> {}, "title" -> "CauchyIntegral", "titlemodifier" -> "", 
+    "windowtitle" -> "CauchyIntegral", "type" -> "Guide", "uri" -> 
+    "CauchyIntegral/guide/CauchyIntegral"}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[586, 21, 4522, 116, 70, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[5133, 141, 56, 1, 70, "GuideTitle",
+ CellID->942062912],
+Cell[5192, 144, 191, 4, 70, "GuideAbstract",
+ CellID->2001916300]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5420, 153, 274, 11, 70, "GuideLearningResourcesSection"],
+Cell[5697, 166, 2639, 57, 70, "GuideLearningResourcesGrid"]
+}, Closed]],
+Cell[8351, 226, 257, 11, 70, "GuideReferenceSection"],
+Cell[8611, 239, 31, 0, 70, "SectionHeaderSpacer"],
+Cell[8645, 241, 366, 10, 70, "GuideText",
+ CellID->203374175],
+Cell[9014, 253, 391, 12, 70, "GuideText",
+ CellID->1813130652],
+Cell[9408, 267, 525, 17, 70, "GuideText",
+ CellID->1211285174],
+Cell[9936, 286, 556, 17, 70, "GuideText",
+ CellID->784343780],
+Cell[10495, 305, 31, 0, 70, "SectionFooterSpacer"],
+Cell[CellGroupData[{
+Cell[10551, 309, 281, 12, 70, "GuideMoreAboutSection",
+ CellID->23220180],
+Cell[10835, 323, 31, 0, 70, "SectionHeaderSpacer"],
+Cell[10869, 325, 58, 1, 70, "GuideMoreAbout",
+ CellID->1567025153],
+Cell[10930, 328, 64, 1, 70, "GuideMoreAbout",
+ CellID->252299663],
+Cell[10997, 331, 31, 0, 70, "SectionFooterSpacer"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11065, 336, 284, 12, 70, "GuideRelatedLinksSection",
+ CellID->415694148],
+Cell[11352, 350, 31, 0, 70, "SectionHeaderSpacer"],
+Cell[11386, 352, 242, 6, 70, "GuideRelatedLinks",
+ CellID->1322539607],
+Cell[11631, 360, 302, 7, 70, "GuideRelatedLinks",
+ CellID->1467428399]
+}, Open  ]],
+Cell[11948, 370, 23, 0, 70, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
