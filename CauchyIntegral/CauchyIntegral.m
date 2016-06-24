@@ -10,6 +10,10 @@ Redistributions in binary form must reproduce the above copyright notice, this l
 Neither the name of the Technial University of Munich nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *)
+(* Error Messages *)
+iterateUntilConvergence::maxIter="Maximum number of iterations (`1`) reached, estimated current precision is `2` "
+iterateUntilConvergence::belowGoal="Could not reach PrecisionGoal (`1`) estimated Precision of result `2` "
+contourCauchyIntegral::maxIter="Maximum number of iterations (`1`) reached. Consider increasing MaxIterations for a more accurate result."
 
 (* public function *)
 CauchyIntegralSEW::usage="CauchyIntegralSEW[f,n,z] calculates a contour for the Cauchy integral given by f,n and z, which optimizes its condition number."
@@ -305,7 +309,7 @@ preciseFindShortestPath[g_Graph,s_,All,paMatrix_,weMatrix_] := Module[{palist,we
 ]
 	
 
-contourCauchyIntegral[g_Graph,p_,f_,n_,opts:OptionsPattern[]] := Module[{fullOpts,fint,parts,z,prevInt,curInt,prevPts,curPts,prevErr,curErr,rp,active,converging,tint,activePos,i,dupPts,zPts},
+contourCauchyIntegral[g_Graph,p_,f_,n_,opts:OptionsPattern[]] := Module[{fullOpts,fint,parts,z,prevInt,curInt,prevPts,curPts,prevErr,curErr,rp,active,converging,tint,activePos,i,dupPts,zPts,minErr},
 	fullOpts=Join[{opts},Options[contourCauchyIntegral]];
 	(* create integrant *)
 	fint = Evaluate[f[#] #^(-n-1)]&;
@@ -333,6 +337,8 @@ contourCauchyIntegral[g_Graph,p_,f_,n_,opts:OptionsPattern[]] := Module[{fullOpt
 	(* reduce precision as this makes it easier later on find identical nodes and remove them*)	
 	zPts = SetPrecision[ zPts, OptionValue@WorkingPrecision -2];
 	curErr = ConstantArray[Infinity,Length[z]];
+	(* smallest error so far for an interval *)
+	minErr = ConstantArray[Infinity,Length[z]];
 	tint = Total[curInt];
 	(* dump intermediate results *)
 	Sow[{1/(2 Pi I) tint,Total@curPts - dupPts}];
@@ -357,7 +363,8 @@ contourCauchyIntegral[g_Graph,p_,f_,n_,opts:OptionsPattern[]] := Module[{fullOpt
 		(* integrate active edges with increased number of rule points *)
 		curInt[[activePos]] = linearPathNIntegrate[fint,z[[activePos]],rulePoints->rp,FilterRules[fullOpts, Options[linearPathNIntegrate]]]; 
 		curInt = SetPrecision[curInt,OptionValue@WorkingPrecision];
-		curErr[[activePos]] = MapThread[relErr,{prevInt[[activePos]],curInt[[activePos]]}];	
+		curErr[[activePos]] = MapThread[relErr,{prevInt[[activePos]],curInt[[activePos]]}];
+		minErr[[activePos]] = MapThread[Min,{curErr[[activePos]],minErr[[activePos]]}];
 		(* create sum over all nodes used so far or just the numer of nodes in the current iteration step *)
 		If[ OptionValue@cumulativeNodeCount,
 			zPts[[activePos]] = Union[
@@ -370,7 +377,14 @@ contourCauchyIntegral[g_Graph,p_,f_,n_,opts:OptionsPattern[]] := Module[{fullOpt
 			curPts[[activePos]] = Length /@ zPts[[activePos]];
 			,
 			curPts[[activePos]] = 2 rp - 1;
-		];	
+		];
+		(* Debug
+		Print[
+			Show[
+				Graphics[{Black,Thick,Line[{{Re@#1, Im@#1}, {Re@#2, Im@#2}}] & @@@ z}],
+				Graphics[{Red,Thick,Line[{{Re@#1, Im@#1}, {Re@#2, Im@#2}}] & @@@ z[[activePos]]}]
+			]
+		]; *)
 		tint = SetPrecision[Total[curInt],OptionValue@WorkingPrecision];
 		(* determine on which edges the integral has not yet converged *)
 		active = (curErr + Log10@Abs[curInt/tint]) > -OptionValue[WorkingPrecision] //Thread;
@@ -378,7 +392,7 @@ contourCauchyIntegral[g_Graph,p_,f_,n_,opts:OptionsPattern[]] := Module[{fullOpt
 		(* setting the precision of curErr is necessary as > might yield undesired results if the precision is too low *)
 		curErr = SetPrecision[curErr,OptionValue@WorkingPrecision];
 		If[ OptionValue@convergenceTest,
-			converging = Thread@ !Thread[ Thread[curErr < -OptionValue[PrecisionGoal]/2] && Thread[curErr+0.05 > prevErr] ];
+			converging = Thread@ !Thread[ Thread[curErr < -OptionValue[PrecisionGoal]/2] && Thread[minErr+0.5 < curErr] ];
 			active = Thread[active && converging];
 		];
 		activePos = Flatten@Position[active,True];
@@ -389,11 +403,14 @@ contourCauchyIntegral[g_Graph,p_,f_,n_,opts:OptionsPattern[]] := Module[{fullOpt
 			Sow[Pick[curInt/tint,active,_ > -MachinePrecision]];
 			Sow[Pick[Transpose@{prevInt,curInt},active,_ > -MachinePrecision]];
 		];
-	];	
+	];
+	If[i == OptionValue@MaxIterations,
+		Message[contourCauchyIntegral::maxIter,OptionValue@MaxIterations];
+	];
 	Return[1/(2 Pi I) Total@curInt];
 ];
 Options[contourCauchyIntegral] := Join[
-									{simplifyContour->True,MaxIterations->50,iterationStepSize->1,cumulativeNodeCount->False,convergenceTest->True},
+									{simplifyContour->True,MaxIterations->100,iterationStepSize->1,cumulativeNodeCount->False,convergenceTest->True},
 									{rulePoints->2,bufferPrecision->2},
 									Options[linearPathNIntegrate],
 									Options[relevantContourParts]
@@ -532,7 +549,7 @@ CauchyIntegral[g_,sew_,f_,n_,z_,opts:OptionsPattern[]] := Module[{dfz,fs},
 	dfz = n! contourCauchyIntegral[g,sew,fs,n,useParallel->False,FilterRules[{opts},Options@contourCauchyIntegral]];
 	Return[dfz];
 ]; 
-Options[CauchyIntegral] = Join[{WorkingPrecision->MachinePrecision,PrecisionGoal->MachinePrecision}];
+Options[CauchyIntegral] = Join[{WorkingPrecision->MachinePrecision,PrecisionGoal->MachinePrecision,MaxIterations->100}];
 
 CauchyIntegralD[f_,n_,z_,opts:OptionsPattern[]] := Module[{g,sew,fullOpts,dfz},
 	fullOpts = Join[{opts},Options[CauchyIntegralD]];
