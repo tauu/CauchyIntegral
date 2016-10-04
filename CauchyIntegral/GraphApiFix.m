@@ -176,7 +176,7 @@ setProperty[g_Graph,p_,val_] := Module[{v,e,pout,gout},
    by using the appropriate method.
     *)
 updateProperty[g_,p_,val_] := Module[{},
-	If[ $VersionNumber == 10,
+	If[ $VersionNumber >= 10,
 		(* Mathematica 10 *)
 		If[ MemberQ[builtinProperties,p] && PropertyValue[g,p] === Automatic,
 			(* builtin properties can be set if they have not been initialized *)
