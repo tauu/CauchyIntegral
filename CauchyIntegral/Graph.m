@@ -92,7 +92,7 @@ addVertexEdgeWeightTrapezoidal[g_,f_,opts:OptionsPattern[]] := Module[{cv,e,wv,w
 	cv = SetPrecision[complexCoordinates[g],OptionValue[WorkingPrecision]];
 	e = List @@@ EdgeList[g];
 	(* evaluate vertexWeight *)
-	wv = f /@ cv;
+	wv = Quiet[f /@ cv /. Infinity -> $MaxMachineNumber/10];
 	(* calculate corresponding EdgeWeight given by TrapezoidalRule *)
 	we = Abs@Differences[ cv[[#]] ] * Mean[wv[[#]]] &/@e;
 	(* set weights *)

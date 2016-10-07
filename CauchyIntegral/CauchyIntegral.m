@@ -483,9 +483,11 @@ shortestPathForCauchyInt[f_,n_,d_,nodes_,opts:OptionsPattern[]] := Module[{g,gf,
 	fixVertexCoordinates[g];
 	rescale[g,{{-d,d},{-d,d}}];
 	(* if a vertex is to close to 0, we drop it, as evaluating gf at 0 causes problems *)
-	v0 = closestVertice[g,0];
-	If[ Abs@complexCoordinates[g,v0] < d/nodes/10,
-		g = IndexGraph@VertexDelete[g,v0];
+	If[ ! OptionValue@"KeepCenter",
+		v0 = closestVertice[g,0];
+		If[ Abs@complexCoordinates[g,v0] < d/nodes/10,
+			g = IndexGraph@VertexDelete[g,v0];
+		];
 	];
 	(* remove vertex on a branchcut and edges across a branch cut *)
 	If[ OptionValue[branchCut] =!= Null,
@@ -500,7 +502,7 @@ shortestPathForCauchyInt[f_,n_,d_,nodes_,opts:OptionsPattern[]] := Module[{g,gf,
 ];
 Options[shortestPathForCauchyInt] = Join[{WorkingPrecision->MachinePrecision,
 										  maxCheckedVertexes->1,Method->"TrapezoidalRule",rulePoints->1,
-										  branchCut->Null, xGrid->True },
+										  branchCut->Null, xGrid->True, "KeepCenter"->False },
 										  Options[findShortestCircle],
 										  Options[addVertexEdgeWeight] ];
 
